@@ -19,7 +19,7 @@ module ClamAV
     UnknownPathException = Class.new(RuntimeError)
 
     def Util.path_to_files(path)
-      if Dir.exist?(path)
+      if File.directory?(path)
         Dir.glob(path + '/*')
       elsif File.exist?(path)
         [path]

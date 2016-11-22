@@ -19,7 +19,7 @@ describe "ClamAV::Client Integration Tests" do
   describe "Util" do
     describe "absolute_path" do
       it "transforms a single file to an array of one element" do
-        expected_path = File.absolute_path(__FILE__)
+        expected_path = File.expand_path(__FILE__)
         actual_path   = ClamAV::Util.path_to_files(__FILE__).first
         assert_equal expected_path, actual_path
       end

@@ -46,7 +46,7 @@ module ClamAV
       if tcp_host && tcp_port
         ::TCPSocket.new(tcp_host, tcp_port)
       else
-        ::UNIXSocket.new(unix_socket || '/var/run/clamav/clamd.ctl')
+        ::UNIXSocket.new(unix_socket || '/usr/local/var/run/clamav/clamd.sock')
       end
     end
   end
