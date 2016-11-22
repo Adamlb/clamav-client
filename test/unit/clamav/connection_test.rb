@@ -22,18 +22,18 @@ describe "ClamAV::Connection" do
 
   it "requires a port and a wrapper" do
     assert_raises(ArgumentError) { ClamAV::Connection.new }
-    assert_raises(ArgumentError) { ClamAV::Connection.new(port: 'foo') }
-    assert_raises(ArgumentError) { ClamAV::Connection.new(wrapper: nil) }
+    assert_raises(ArgumentError) { ClamAV::Connection.new(:port => 'foo') }
+    assert_raises(ArgumentError) { ClamAV::Connection.new(:wrapper => nil) }
   end
 
   it "can be constructed with a port and wrapper class" do
-    ClamAV::Connection.new(socket: socket_mock, wrapper: wrapper_mock)
+    ClamAV::Connection.new(:socket => socket_mock, :wrapper => wrapper_mock)
   end
 
   it "support raw writes" do
     socket_mock.expect(:write, nil, ["foo"])
 
-    conn = ClamAV::Connection.new(socket: socket_mock, wrapper: wrapper_mock)
+    conn = ClamAV::Connection.new(:socket => socket_mock, :wrapper => wrapper_mock)
     conn.raw_write("foo")
   end
 end

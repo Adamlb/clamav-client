@@ -36,8 +36,8 @@ module ClamAV
 
     def default_connection
       ClamAV::Connection.new(
-        socket: resolve_default_socket,
-        wrapper: ::ClamAV::Wrappers::NewLineWrapper.new
+        :socket => resolve_default_socket,
+        :wrapper => ::ClamAV::Wrappers::NewLineWrapper.new
       )
     end
 

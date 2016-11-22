@@ -29,7 +29,11 @@ module ClamAV
         # OK response looks like "1: stream: OK" or "1: /tmp/NOT_A_VIRUS.TXT: OK"
         # FOUND response looks like "1: stream: Eicar-Test-Signature FOUND" or "1: /tmp/EICAR.COM: Eicar-Test-Signature FOUND"
         def get_status_from_response(str)
-          /^(?<id>\d+): (?<filepath>.*): (?<virus_name>.*)\s?(?<status>(OK|FOUND))$/ =~ str
+          /^(\d+): (.*): (.*)\s?((OK|FOUND))$/ =~ str
+          id = Regexp.last_match(0)
+          filepath = Regexp.last_match(1)
+          virus_name = Regexp.last_match(2)
+          status = Regexp.last_match(3)
           case status
           when 'OK' then ClamAV::SuccessResponse.new(filepath)
           when 'FOUND' then ClamAV::VirusResponse.new(filepath, virus_name.strip)
